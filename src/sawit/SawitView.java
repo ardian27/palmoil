@@ -4,6 +4,7 @@
 
 package sawit;
 
+import java.awt.Image;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -11,10 +12,17 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.Timer;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * The application's main frame.
@@ -80,6 +88,8 @@ public class SawitView extends FrameView {
             }
         });
     }
+    
+    
 
     @Action
     public void showAboutBox() {
@@ -90,6 +100,123 @@ public class SawitView extends FrameView {
         }
         SawitApp.getApplication().show(aboutBox);
     }
+    
+    @Action
+    public void showBox() {
+        if (aboutBox == null) {
+            JFrame mainFrame = SawitApp.getApplication().getMainFrame();
+            aboutBox = new SawitAboutBox(mainFrame);
+            aboutBox.setLocationRelativeTo(mainFrame);
+        }
+        SawitApp.getApplication().show(aboutBox);
+    }
+    
+    @Action
+    public  void selectImage1(){
+        JFileChooser file = new JFileChooser();
+          file.setCurrentDirectory(new File(System.getProperty("user.home")));
+          //filter the files
+          FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg","gif","png");
+          file.addChoosableFileFilter(filter);
+          int result = file.showSaveDialog(null);
+          
+          if(result == JFileChooser.APPROVE_OPTION){
+              File selectedFile = file.getSelectedFile();
+              String path = selectedFile.getAbsolutePath();
+              
+              BufferedImage image1 = null;
+              File file1 = null;
+              
+              FunctionSawit fc = new FunctionSawit();
+              
+              try {
+                   file1 = new File(path);
+                   image1 = ImageIO.read(file1);
+                   fc.getRedinArray(image1);
+                   
+              } catch (Exception e) {
+                  System.out.println("Gagal Memilih Gambar "+e.getMessage());
+              }
+              
+              
+              gambar1.setIcon(fc.LabeltoImage100R(path));
+              
+          }
+          
+           else if(result == JFileChooser.CANCEL_OPTION){
+              System.out.println("No File Select");
+          }
+    }
+    
+    @Action
+    public  void selectImage2(){
+        JFileChooser file = new JFileChooser();
+          file.setCurrentDirectory(new File(System.getProperty("user.home")));
+          //filter the files
+          FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg","gif","png");
+          file.addChoosableFileFilter(filter);
+          int result = file.showSaveDialog(null);
+          
+          if(result == JFileChooser.APPROVE_OPTION){
+              File selectedFile = file.getSelectedFile();
+              String path = selectedFile.getAbsolutePath();
+              
+              FunctionSawit fc = new FunctionSawit();
+              gambar2.setIcon(fc.LabeltoImage100R(path));
+              
+          }
+          
+           else if(result == JFileChooser.CANCEL_OPTION){
+              System.out.println("No File Select");
+          }
+    }
+    
+    @Action
+    public  void selectImage3(){
+        JFileChooser file = new JFileChooser();
+          file.setCurrentDirectory(new File(System.getProperty("user.home")));
+          //filter the files
+          FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg","gif","png");
+          file.addChoosableFileFilter(filter);
+          int result = file.showSaveDialog(null);
+          
+          if(result == JFileChooser.APPROVE_OPTION){
+              File selectedFile = file.getSelectedFile();
+              String path = selectedFile.getAbsolutePath();
+              
+              FunctionSawit fc = new FunctionSawit();
+              gambar3.setIcon(fc.LabeltoImage100R(path));
+              
+          }
+          
+           else if(result == JFileChooser.CANCEL_OPTION){
+              System.out.println("No File Select");
+          }
+    }
+    
+    @Action
+    public  void selectImage4(){
+        JFileChooser file = new JFileChooser();
+          file.setCurrentDirectory(new File(System.getProperty("user.home")));
+          //filter the files
+          FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg","gif","png");
+          file.addChoosableFileFilter(filter);
+          int result = file.showSaveDialog(null);
+          
+          if(result == JFileChooser.APPROVE_OPTION){
+              File selectedFile = file.getSelectedFile();
+              String path = selectedFile.getAbsolutePath();
+              
+              FunctionSawit fc = new FunctionSawit();
+              gambar4.setIcon(fc.LabeltoImage100R(path));
+              
+          }
+          
+           else if(result == JFileChooser.CANCEL_OPTION){
+              System.out.println("No File Select");
+          }
+    }
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -116,10 +243,23 @@ public class SawitView extends FrameView {
         gambar4 = new javax.swing.JLabel();
         btn_gambar4 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        gambarhsv = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         btn_hsv = new javax.swing.JButton();
         combo_sawit = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        btn_hsv1 = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        btn_hsv3 = new javax.swing.JButton();
+        jPanel14 = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -153,19 +293,22 @@ public class SawitView extends FrameView {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(gambar1)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(gambar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(gambar1)
-                .addGap(0, 86, Short.MAX_VALUE))
+            .addComponent(gambar1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
         );
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(sawit.SawitApp.class).getContext().getActionMap(SawitView.class, this);
+        btn_gambar1.setAction(actionMap.get("selectImage1")); // NOI18N
         btn_gambar1.setText(resourceMap.getString("btn_gambar1.text")); // NOI18N
         btn_gambar1.setName("btn_gambar1"); // NOI18N
+        btn_gambar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_gambar1ActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(resourceMap.getColor("jPanel2.background")); // NOI18N
         jPanel2.setName("jPanel2"); // NOI18N
@@ -177,17 +320,14 @@ public class SawitView extends FrameView {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(gambar2)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(gambar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(gambar2)
-                .addGap(0, 86, Short.MAX_VALUE))
+            .addComponent(gambar2, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
         );
 
+        btn_gambar2.setAction(actionMap.get("selectImage2")); // NOI18N
         btn_gambar2.setText(resourceMap.getString("btn_gambar2.text")); // NOI18N
         btn_gambar2.setName("btn_gambar2"); // NOI18N
 
@@ -201,17 +341,14 @@ public class SawitView extends FrameView {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(gambar3)
-                .addGap(0, 9, Short.MAX_VALUE))
+            .addComponent(gambar3, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(gambar3)
-                .addGap(0, 86, Short.MAX_VALUE))
+            .addComponent(gambar3, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
         );
 
+        btn_gambar3.setAction(actionMap.get("selectImage3")); // NOI18N
         btn_gambar3.setText(resourceMap.getString("btn_gambar3.text")); // NOI18N
         btn_gambar3.setName("btn_gambar3"); // NOI18N
 
@@ -225,17 +362,14 @@ public class SawitView extends FrameView {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(gambar4)
-                .addGap(0, 8, Short.MAX_VALUE))
+            .addComponent(gambar4, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(gambar4)
-                .addGap(0, 86, Short.MAX_VALUE))
+            .addComponent(gambar4, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
         );
 
+        btn_gambar4.setAction(actionMap.get("selectImage4")); // NOI18N
         btn_gambar4.setText(resourceMap.getString("btn_gambar4.text")); // NOI18N
         btn_gambar4.setName("btn_gambar4"); // NOI18N
 
@@ -285,15 +419,52 @@ public class SawitView extends FrameView {
         jPanel8.setBackground(resourceMap.getColor("jPanel8.background")); // NOI18N
         jPanel8.setName("jPanel8"); // NOI18N
 
+        jPanel11.setName("jPanel11"); // NOI18N
+
+        jLabel4.setBackground(resourceMap.getColor("jLabel4.background")); // NOI18N
+        jLabel4.setFont(resourceMap.getFont("jLabel4.font")); // NOI18N
+        jLabel4.setForeground(resourceMap.getColor("jLabel4.foreground")); // NOI18N
+        jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
+        jLabel4.setName("jLabel4"); // NOI18N
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        gambarhsv.setForeground(resourceMap.getColor("gambarhsv.foreground")); // NOI18N
+        gambarhsv.setText(resourceMap.getString("gambarhsv.text")); // NOI18N
+        gambarhsv.setName("gambarhsv"); // NOI18N
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gambarhsv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gambarhsv, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel9.setBackground(resourceMap.getColor("jPanel9.background")); // NOI18N
@@ -311,30 +482,149 @@ public class SawitView extends FrameView {
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
 
+        jPanel6.setBackground(resourceMap.getColor("jPanel6.background")); // NOI18N
+        jPanel6.setName("jPanel6"); // NOI18N
+
+        jLabel6.setBackground(resourceMap.getColor("jLabel6.background")); // NOI18N
+        jLabel6.setFont(resourceMap.getFont("jLabel6.font")); // NOI18N
+        jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
+        jLabel6.setName("jLabel6"); // NOI18N
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        btn_hsv1.setText(resourceMap.getString("btn_hsv1.text")); // NOI18N
+        btn_hsv1.setName("btn_hsv1"); // NOI18N
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_hsv, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_hsv, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_hsv1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(combo_sawit, 0, 111, Short.MAX_VALUE)))
+                        .addComponent(combo_sawit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(combo_sawit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(165, 165, 165)
-                .addComponent(btn_hsv)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_hsv1)
+                    .addComponent(btn_hsv))
+                .addGap(26, 26, 26))
+        );
+
+        jPanel12.setBackground(resourceMap.getColor("jPanel12.background")); // NOI18N
+        jPanel12.setName("jPanel12"); // NOI18N
+
+        jPanel13.setBackground(resourceMap.getColor("jPanel13.background")); // NOI18N
+        jPanel13.setName("jPanel13"); // NOI18N
+
+        jLabel8.setBackground(resourceMap.getColor("jLabel8.background")); // NOI18N
+        jLabel8.setFont(resourceMap.getFont("jLabel8.font")); // NOI18N
+        jLabel8.setText(resourceMap.getString("jLabel8.text")); // NOI18N
+        jLabel8.setName("jLabel8"); // NOI18N
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jLabel7.setBackground(resourceMap.getColor("jLabel7.background")); // NOI18N
+        jLabel7.setFont(resourceMap.getFont("jLabel7.font")); // NOI18N
+        jLabel7.setForeground(resourceMap.getColor("jLabel7.foreground")); // NOI18N
+        jLabel7.setText(resourceMap.getString("jLabel7.text")); // NOI18N
+        jLabel7.setName("jLabel7"); // NOI18N
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "70:30", "80:20", "90:10" }));
+        jComboBox1.setName("jComboBox1"); // NOI18N
+
+        btn_hsv3.setText(resourceMap.getString("btn_hsv3.text")); // NOI18N
+        btn_hsv3.setName("btn_hsv3"); // NOI18N
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_hsv3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_hsv3))
+        );
+
+        jPanel14.setBackground(resourceMap.getColor("jPanel14.background")); // NOI18N
+        jPanel14.setName("jPanel14"); // NOI18N
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 689, Short.MAX_VALUE)
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -347,22 +637,28 @@ public class SawitView extends FrameView {
                 .addGap(18, 18, 18)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(505, Short.MAX_VALUE))
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -370,7 +666,6 @@ public class SawitView extends FrameView {
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(sawit.SawitApp.class).getContext().getActionMap(SawitView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
@@ -401,11 +696,11 @@ public class SawitView extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 1378, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 816, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1214, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -428,28 +723,41 @@ public class SawitView extends FrameView {
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_gambar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gambar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_gambar1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_gambar1;
     private javax.swing.JButton btn_gambar2;
     private javax.swing.JButton btn_gambar3;
     private javax.swing.JButton btn_gambar4;
     private javax.swing.JButton btn_hsv;
+    private javax.swing.JButton btn_hsv1;
+    private javax.swing.JButton btn_hsv3;
     private javax.swing.JComboBox combo_sawit;
     private javax.swing.JLabel gambar1;
     private javax.swing.JLabel gambar2;
     private javax.swing.JLabel gambar3;
     private javax.swing.JLabel gambar4;
-    private javax.swing.JLabel gambar5;
-    private javax.swing.JLabel gambar6;
+    private javax.swing.JLabel gambarhsv;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel mainPanel;
