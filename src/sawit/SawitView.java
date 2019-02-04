@@ -132,7 +132,22 @@ public class SawitView extends FrameView {
               try {
                    file1 = new File(path);
                    image1 = ImageIO.read(file1);
-                   fc.getRedinArray(image1);
+                   
+                   fc.setR1(fc.getRedinArray(image1));
+                   fc.setG1(fc.getGreeninArray(image1));
+                   fc.setB1(fc.getBlueinArray(image1));
+                   
+                   //System.out.println("width = "+image1.getWidth());
+                   //System.out.println("height = "+image1.getHeight());
+                   //int [][] val = fc.getR1();
+                   
+                /*   for (int i = 0; i < image1.getWidth(); i++) {
+                       for (int j = 0; j < image1.getHeight(); j++) {
+                            System.out.println("["+i+"]["+j+"]"+val[i][j]+"\t");
+                       }
+                  }
+                   */
+                   
                    
               } catch (Exception e) {
                   System.out.println("Gagal Memilih Gambar "+e.getMessage());
@@ -157,11 +172,30 @@ public class SawitView extends FrameView {
           file.addChoosableFileFilter(filter);
           int result = file.showSaveDialog(null);
           
+          
+          
           if(result == JFileChooser.APPROVE_OPTION){
               File selectedFile = file.getSelectedFile();
               String path = selectedFile.getAbsolutePath();
               
+              BufferedImage image2 = null;
+              File file2 = null;
+              
               FunctionSawit fc = new FunctionSawit();
+              
+              try {
+                   file2 = new File(path);
+                   image2 = ImageIO.read(file2);
+                   
+                   fc.setR2(fc.getRedinArray(image2));
+                   fc.setG2(fc.getGreeninArray(image2));
+                   fc.setB2(fc.getBlueinArray(image2));
+                   
+              } catch (Exception e) {
+                  System.out.println("Gagal Memilih Gambar "+e.getMessage());
+              }
+              
+              
               gambar2.setIcon(fc.LabeltoImage100R(path));
               
           }
@@ -184,7 +218,24 @@ public class SawitView extends FrameView {
               File selectedFile = file.getSelectedFile();
               String path = selectedFile.getAbsolutePath();
               
+              BufferedImage image3 = null;
+              File file3 = null;
+              
               FunctionSawit fc = new FunctionSawit();
+              
+              try {
+                   file3 = new File(path);
+                   image3 = ImageIO.read(file3);
+                   
+                   fc.setR3(fc.getRedinArray(image3));
+                   fc.setG3(fc.getGreeninArray(image3));
+                   fc.setB3(fc.getBlueinArray(image3));
+                   
+              } catch (Exception e) {
+                  System.out.println("Gagal Memilih Gambar "+e.getMessage());
+              }
+              
+              
               gambar3.setIcon(fc.LabeltoImage100R(path));
               
           }
@@ -196,6 +247,8 @@ public class SawitView extends FrameView {
     
     @Action
     public  void selectImage4(){
+        
+        FunctionSawit fc = new FunctionSawit();
         JFileChooser file = new JFileChooser();
           file.setCurrentDirectory(new File(System.getProperty("user.home")));
           //filter the files
@@ -207,7 +260,22 @@ public class SawitView extends FrameView {
               File selectedFile = file.getSelectedFile();
               String path = selectedFile.getAbsolutePath();
               
-              FunctionSawit fc = new FunctionSawit();
+              BufferedImage image4 = null;
+              File file4 = null;
+              
+              
+              try {
+                   file4 = new File(path);
+                   image4 = ImageIO.read(file4);
+                   
+                   fc.setR1(fc.getRedinArray(image4));
+                   fc.setG1(fc.getGreeninArray(image4));
+                   fc.setB1(fc.getBlueinArray(image4));
+                   
+              } catch (Exception e) {
+                  System.out.println("Gagal Memilih Gambar "+e.getMessage());
+              }
+              
               gambar4.setIcon(fc.LabeltoImage100R(path));
               
           }
@@ -215,6 +283,14 @@ public class SawitView extends FrameView {
            else if(result == JFileChooser.CANCEL_OPTION){
               System.out.println("No File Select");
           }
+    }
+    
+    @Action
+    public void runHSV(){
+        
+        FunctionSawit fc = new FunctionSawit();
+        
+        fc.getHSV();
     }
     
 
@@ -470,6 +546,7 @@ public class SawitView extends FrameView {
         jPanel9.setBackground(resourceMap.getColor("jPanel9.background")); // NOI18N
         jPanel9.setName("jPanel9"); // NOI18N
 
+        btn_hsv.setAction(actionMap.get("runHSV")); // NOI18N
         btn_hsv.setText(resourceMap.getString("btn_hsv.text")); // NOI18N
         btn_hsv.setName("btn_hsv"); // NOI18N
 

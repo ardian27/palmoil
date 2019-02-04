@@ -389,6 +389,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btn_hsv">
               <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="sawit.SawitView" id="runHSV" methodName="runHSV"/>
+                </Property>
                 <Property name="text" type="java.lang.String" resourceKey="btn_hsv.text"/>
                 <Property name="name" type="java.lang.String" value="btn_hsv" noResource="true"/>
               </Properties>
