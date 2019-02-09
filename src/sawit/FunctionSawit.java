@@ -36,6 +36,7 @@ public class FunctionSawit {
     public FunctionSawit(){
 
     }
+    
    
     public ImageIcon LabeltoImage100R(String imagepath)
     {
@@ -146,6 +147,27 @@ public class FunctionSawit {
     public double pembulatan(double nilai){
         
         double hasilPembulatan= Double.parseDouble(String.format("%.6f", nilai));
+        
+        return hasilPembulatan;
+    } 
+    
+    public double pembulatan4Angka(double nilai){
+        
+        double hasilPembulatan= Double.parseDouble(String.format("%.4f", nilai));
+        
+        return hasilPembulatan;
+    }
+    
+    public double pembulatan2Angka(double nilai){
+        
+        double hasilPembulatan= Double.parseDouble(String.format("%.2f", nilai));
+        
+        return hasilPembulatan;
+    }
+    
+    public double pembulatan1Angka(double nilai){
+        
+        double hasilPembulatan= Double.parseDouble(String.format("%.1f", nilai));
         
         return hasilPembulatan;
     }
