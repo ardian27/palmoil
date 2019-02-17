@@ -11,10 +11,14 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author LENOVO
@@ -144,6 +148,92 @@ public class FunctionSawit {
         return b;
     }
     
+    
+    public void data70Normalisasi(){
+         
+        FunctionSawit fc = new FunctionSawit();
+        ArrayList<Double> h= new ArrayList<Double>();
+        ArrayList<Double> s= new ArrayList<Double>();
+        ArrayList<Double> v= new ArrayList<Double>();
+        ArrayList<String> t= new ArrayList<String>();
+        
+        
+        ArrayList<Double> x1= new ArrayList<Double>();
+        ArrayList<Double> x2= new ArrayList<Double>();
+        ArrayList<Double> x3= new ArrayList<Double>();
+        ArrayList<String> xt= new ArrayList<String>();
+        
+         try {
+             Connection conn =(Connection)Koneksi.koneksiDB(); 
+             java.sql.Statement stm = conn.createStatement();
+             String tc = "TRUNCATE normalisasi";
+             stm.executeQuery(tc);
+             java.sql.ResultSet sql = stm.executeQuery("select * from sawit limit 7");
+             
+            int i = 0;
+             while((sql.next())){
+                h.add(sql.getDouble("H"));
+                s.add(sql.getDouble("S"));
+                v.add(sql.getDouble("V"));
+                t.add(sql.getString("Target"));
+                
+                i++;
+            }
+            sql.close();
+            
+            for(int a = 0; a<h.size(); a++){
+                
+                double minH = Collections.min(h);
+                double maxH = Collections.max(h);
+                double minS = Collections.min(s);
+                double maxS = Collections.max(s);
+                double minV = Collections.min(v);
+                double maxV = Collections.max(v);
+                 
+                
+                double ex1 = normalisasi(h.get(a),minH,maxH);
+                double ex2 = normalisasi(s.get(a),minS,maxS);
+                double ex3 = normalisasi(v.get(a),minV,maxV);
+                
+             /*   
+                x1.add(fc.pembulatan(ex1));
+                
+                x2.add(fc.pembulatan(ex1));
+                
+                x3.add(fc.pembulatan(ex1));
+                
+                xt.add(t.get(a));
+               */ 
+             
+                tambahDataNormalisasi(ex1,ex2,ex3,t.get(a));
+                
+            }
+        }
+        catch(Exception e){
+        }
+       
+    }
+    
+    
+    
+    
+    private void tambahDataNormalisasi(double hh , double ss , double vv, String target){
+        try {
+            
+            String sql = "insert into normalisasi (H,S,V,Target)values('"+hh+"','"+ss+"','"+vv+"','"+target+"')";
+            java.sql.Connection conn = (java.sql.Connection)Koneksi.koneksiDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.execute();
+            pst.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }
+     
+   
+    
     public double pembulatan(double nilai){
         
         double hasilPembulatan= Double.parseDouble(String.format("%.6f", nilai));
@@ -183,6 +273,11 @@ public class FunctionSawit {
         return null;
     }
     
+     public Double normalisasi(Double input, Double min, Double max) {
+        return (input - min) / (max - min);
+    }
+ 
+    
     
     
     //PRINT , GET , SET Value
@@ -193,6 +288,15 @@ public class FunctionSawit {
         for(int j = 0; j < in[0].length; j++){
             System.out.print(in[i][j] + "\t");
         }
+        System.out.print("\n");
+    }
+    }
+    
+    public void printGrid1(double[] in){  
+    for(int i = 0; i < in.length; i++){  
+        
+            System.out.print(in[i] + "\t");
+        
         System.out.print("\n");
     }
     }
