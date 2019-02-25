@@ -5,6 +5,10 @@
  */
 package sawit;
 
+import java.sql.Connection;
+import javax.xml.ws.Action;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author Ardi
@@ -16,6 +20,7 @@ public class CenterRandom extends javax.swing.JFrame {
      */
     public CenterRandom() {
         initComponents();
+        getData();
     }
 
     /**
@@ -32,7 +37,7 @@ public class CenterRandom extends javax.swing.JFrame {
         tbl_random = new javax.swing.JTable();
         btn_random = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(sawit.SawitApp.class).getContext().getResourceMap(CenterRandom.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setAlwaysOnTop(true);
@@ -60,6 +65,11 @@ public class CenterRandom extends javax.swing.JFrame {
 
         btn_random.setText(resourceMap.getString("btn_random.text")); // NOI18N
         btn_random.setName("btn_random"); // NOI18N
+        btn_random.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_randomActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,9 +114,60 @@ public class CenterRandom extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_randomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_randomActionPerformed
+        // TODO add your handling code here:
+        getDataRandom();
+        
+    }//GEN-LAST:event_btn_randomActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    
+    
+    private void getData(){
+    try {
+        Connection conn =(Connection)Koneksi.koneksiDB();
+        java.sql.Statement stm = conn.createStatement();
+        
+       
+       
+        java.sql.ResultSet sql = stm.executeQuery("select * from center_random");
+        tbl_random.setModel(DbUtils.resultSetToTableModel(sql));
+        stm.close();
+    }
+    catch (Exception e) {
+        System.out.print("Gagal Set Tabel Random Data Sawit");
+    }
+    }
+    
+    private void getDataRandom(){
+    try {
+        Connection conn =(Connection)Koneksi.koneksiDB();
+        java.sql.Statement stm = conn.createStatement();
+        
+        String tc ="Truncate center_random";
+        stm.execute(tc);
+         
+        String HSV1="insert into center_random select * from normalisasi where Target=00 Order By Rand() limit 1";
+        stm.execute(HSV1);
+        
+        String HSV2="insert into center_random select * from normalisasi where Target=10 Order By Rand() limit 1";
+        stm.execute(HSV2);
+        
+        String HSV3="insert into center_random select * from normalisasi where Target=11 Order By Rand() limit 1";
+        stm.execute(HSV3);
+        
+        
+       
+        java.sql.ResultSet sql = stm.executeQuery("select * from center_random");
+        tbl_random.setModel(DbUtils.resultSetToTableModel(sql));
+        stm.close();
+    }
+    catch (Exception e) {
+        System.out.print("Gagal Set Tabel Random Data Sawit");
+    }
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

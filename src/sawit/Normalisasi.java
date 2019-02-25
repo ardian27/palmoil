@@ -22,7 +22,7 @@ public class Normalisasi extends javax.swing.JFrame {
         getData();
     }
 
-     private void getData(){
+    private void getData(){
     try {
         Connection conn =(Connection)Koneksi.koneksiDB();
         java.sql.Statement stm = conn.createStatement();
@@ -131,8 +131,11 @@ public class Normalisasi extends javax.swing.JFrame {
             fc.data70Normalisasi();
             getData();
         }else if (itemText=="80:20"){
-            
+            fc.data80Normalisasi();
+            getData();
         }else{
+            fc.data90Normalisasi();
+            getData();
             
         }
     }//GEN-LAST:event_btn_normalisasiActionPerformed
